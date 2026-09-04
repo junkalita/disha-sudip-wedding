@@ -108,11 +108,8 @@
   .hero-eyebrow{color:var(--rose);margin-bottom:12px}
   .invite-line{font:italic 18px "Cormorant Garamond";color:var(--muted);margin:0 0 6px}
   .hero h1{font:clamp(68px,20vw,140px)/.74 "Italiana";font-weight:400;margin:0;display:flex;flex-direction:column;gap:2px;
-    background:linear-gradient(100deg,var(--ink) 0 38%,#e7c98f 46%,#fff3d6 50%,#e7c98f 54%,var(--ink) 62% 100%);
-    background-size:220% 100%;background-position-x:120%;
-    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
-  .hero h1 .amp{font:italic 30px "Cormorant Garamond";color:var(--rose);margin:6px 0;
-    background:none;-webkit-text-fill-color:var(--rose)}
+    color:var(--ink);text-shadow:0 1px 0 rgba(191,160,106,.12)}
+  .hero h1 .amp{font:italic 30px "Cormorant Garamond";color:var(--rose);margin:6px 0}
   .hero-divider{display:flex;justify-content:center;align-items:center;gap:10px;margin:22px auto}
   .hero-divider span{height:1px;width:52px;background:rgba(191,160,106,.6)}
   .hero-divider b{font-size:10px;color:var(--gold);font-weight:400}
@@ -509,16 +506,11 @@
     const heroTl = gsap.timeline({defaults:{ease:"power3.out"}});
     heroTl.from(".nav",{y:-22,opacity:0,duration:.7})
       .from(".hero-eyebrow,.invite-line",{y:24,opacity:0,stagger:.1,duration:.8},"-=.3")
-      .from(".hero h1 span",{yPercent:120,opacity:0,skewY:6,stagger:.18,duration:1.15,ease:"power4.out"},"-=.4")
+      .from(".hero h1 span",{yPercent:120,opacity:0,skewY:6,stagger:.18,duration:1.15,ease:"power4.out",clearProps:"opacity,transform"},"-=.4")
       .from(".hero h1 .amp,.hero-divider,.hero-copy .pill-button",{y:20,opacity:0,stagger:.08,duration:.7},"-=.6")
       .from(".hero-scene",{scale:.9,opacity:0,y:26,duration:1.4},"-=1")
       .from(".hero-scene img",{opacity:0,scale:1.06,duration:1.4,ease:"power2.out"},"-=1.3")
       .from(".hero-floral",{opacity:0,scale:.7,rotation:-8,stagger:.12,duration:1.2},"-=1.3");
-
-    // luxury: soft gold shimmer sweep across the names, once
-    gsap.fromTo(".hero h1",{backgroundPositionX:"-120%"},{
-      backgroundPositionX:"220%",duration:2.2,ease:"power2.inOut",delay:1.5
-    });
 
     // subtle idle float on the couple image
     gsap.to(".hero-scene img",{y:-10,duration:4.4,repeat:-1,yoyo:true,ease:"sine.inOut"});
@@ -556,9 +548,6 @@
       scrollTrigger:{trigger:".details",start:"top 90%",once:true}});
     gsap.from(".date-connector",{opacity:0,scale:.6,duration:.9,ease:"back.out(1.7)",clearProps:"all",
       scrollTrigger:{trigger:".details",start:"top 90%",once:true}});
-
-    // luxury: the couple names get a slow continuous shimmer loop after intro
-    gsap.to(".hero h1",{backgroundPositionX:"-40%",duration:9,repeat:-1,yoyo:true,ease:"sine.inOut",delay:4});
 
     // magnetic pill buttons (desktop)
     if(window.matchMedia("(pointer:fine)").matches){
